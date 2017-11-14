@@ -8,16 +8,19 @@ namespace Contacts
 {
     class Contact
     {
-        //Represents whether the contact is personal or business contact
-        private bool _isPersonal;
+        private const int Personal = 0;
+        private const int Business = 1;
 
-        public String FirstName { get; set; }
-        public String LastName { get; set; }
-        public String PhoneNumber { get; set; }
+        private Person _person;
+        private PhoneNumber _number;
+        private int _contactType;
 
-        public Contact(bool personalContact)
+
+        public Contact(string firstName, string lastName, string phoneNumber, int type)
         {
-            _isPersonal = personalContact;
+            _person = new Person(firstName, lastName);
+            _number = new PhoneNumber(phoneNumber);
+            _contactType = type;
         }
     }
 
@@ -25,13 +28,7 @@ namespace Contacts
     {
         static void Main(string[] args)
         {
-            var person1 = new Contact(true)
-            {
-                FirstName = "Maya",
-                LastName = "Roy",
-                PhoneNumber = "6470040004"
-            };
-
+            var person1 = new Contact("Maya", "Roy", "6470040004", 0);
             List<Contact> allContacts = new List<Contact>();
             allContacts.Add(person1);
         }
