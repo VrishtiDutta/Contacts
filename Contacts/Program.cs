@@ -1,36 +1,55 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+﻿using System.Collections.Generic;
 
 namespace Contacts
 {
-    class Contact
-    {
-        private const int Personal = 0;
-        private const int Business = 1;
+    public enum ContactType { Personal, Business }
 
+    internal class Contact
+    {
         private Person _person;
         private PhoneNumber _number;
-        private int _contactType;
 
-
-        public Contact(string firstName, string lastName, string phoneNumber, int type)
+        protected Contact(string firstName, string lastName, string phoneNumber)
         {
             _person = new Person(firstName, lastName);
             _number = new PhoneNumber(phoneNumber);
-            _contactType = type;
         }
+
+
+        public static Contact CreateContact(string firstName, string lastName, string phoneNumber, ContactType type)
+        {
+            switch (type)
+            {
+                case ContactType.Personal:
+                {
+                    return new Personal(firstName, lastName, phoneNumber);
+                }
+                case ContactType.Business:
+                {
+                    return new Business(firstName, lastName, phoneNumber);
+                }
+            }
+            return null;
+        }
+    }
+
+    internal class Personal : Contact
+    {
+        public Personal(string firstName, string lastName, string phoneNumber) : base(firstName, lastName, phoneNumber) { }
+
+    }
+
+    internal class Business : Contact
+    {
+        public Business(string firstName, string lastName, string phoneNumber) : base(firstName, lastName, phoneNumber) { }
     }
 
     class Program
     {
-        static void Main(string[] args)
+        private static void Main(string[] args)
         {
-            var person1 = new Contact("Maya", "Roy", "6470040004", 0);
-            List<Contact> allContacts = new List<Contact>();
-            allContacts.Add(person1);
+            var person1 = Contact.CreateContact("Maya", "Roy", "6470040004", ContactType.Personal);
+            List<Contact> allContacts = new List<Contact> { person1 };
         }
     }
 }
