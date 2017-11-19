@@ -44,12 +44,21 @@ namespace Contacts
         public Business(string firstName, string lastName, string phoneNumber) : base(firstName, lastName, phoneNumber) { }
     }
 
+    internal class ContactBook {
+        private List<Contact> allContacts = new List<Contact>();
+
+        public void AddContact(Contact newContact)
+        {
+            allContacts.Add(newContact);    
+        }
+    }
     class Program
     {
         private static void Main(string[] args)
         {
+            var contacts = new ContactBook();
             var person1 = Contact.CreateContact("Maya", "Roy", "6470040004", ContactType.Personal);
-            List<Contact> allContacts = new List<Contact> { person1 };
+            contacts.AddContact(person1);
         }
     }
 }
