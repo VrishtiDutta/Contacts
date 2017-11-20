@@ -8,13 +8,14 @@ namespace Contacts
 {
     class PhoneNumber
     {
+        const int AREACODELEN = 3;
         private String _areaCode;
         private String _number;
 
         public PhoneNumber(string number)
         {
             _number = number;
-            _areaCode = number.Substring(0, 3);
+            _areaCode = number.Substring(0, AREACODELEN);
         }
 
         public string GetNumber()
