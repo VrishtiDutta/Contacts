@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 
 namespace Contacts
 {
@@ -36,7 +37,7 @@ namespace Contacts
         {
             var personToCompare = obj as Person;
             return (personToCompare != null) && 
-                    (personToCompare.GetName().Equals(_person.GetName())) ;
+                (String.Compare(personToCompare.GetName(), _person.GetName(), StringComparison.OrdinalIgnoreCase) == 0) ;
         }
 
         public override int GetHashCode()
@@ -67,6 +68,16 @@ namespace Contacts
         public void AddContact(Contact newContact)
         {
             allContacts.Add(newContact);    
+        }
+
+        public Contact GetContact(string firstName, string lastName)
+        {
+            foreach (var contact in allContacts)
+            {
+                if (contact.Equals(new Person(firstName, lastName)))
+                    return contact;
+            }
+            return null;
         }
     }
     class Program
