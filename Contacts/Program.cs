@@ -31,6 +31,23 @@ namespace Contacts
             }
             return null;
         }
+
+        public override bool Equals(object obj)
+        {
+            var personToCompare = obj as Person;
+            return (personToCompare != null) && 
+                    (personToCompare.GetName().Equals(_person.GetName())) ;
+        }
+
+        public override int GetHashCode()
+        {
+            return base.GetHashCode();
+        }
+
+        public override string ToString()
+        {
+            return $"{_person.GetName()}: {_number.GetNumber()}";
+        }
     }
 
     internal class Personal : Contact
