@@ -16,5 +16,10 @@ namespace Contacts
             _firstName = first;
             _lastName = last;
         }
+
+        public String GetName()
+        {
+            return _firstName + " " + _lastName;
+        }
     }
 }

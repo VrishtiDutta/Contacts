@@ -16,5 +16,15 @@ namespace Contacts
             _number = number;
             _areaCode = number.Substring(0, 3);
         }
+
+        public string GetNumber()
+        {
+            return _number;
+        }
+
+        public string GetAreaCode()
+        {
+            return _areaCode;
+        }
     }
 }
